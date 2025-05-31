@@ -17,7 +17,7 @@ import Gemini
 # Replace these with your app's credentials
 CLIENT_ID = os.getenv("SPOTIFY_API_KEY") 
 CLIENT_SECRET = os.getenv("SPOTIFY_CLIENT_SECRET")
-REDIRECT_URI = "http://127.0.0.1:8888/callback"
+REDIRECT_URI = "https://recsplus.onrender.com/callback"
 
 AUTH_URL = 'https://accounts.spotify.com/authorize'
 TOKEN_URL = 'https://accounts.spotify.com/api/token'
