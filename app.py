@@ -341,4 +341,6 @@ def get_track_id(song_name, access_token):  # added access_token
         return None
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8888)    
+    import os
+    port = int(os.environ.get('PORT', 8888))
+    app.run(debug=False, port=port, host='0.0.0.0') 
