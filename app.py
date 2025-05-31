@@ -210,7 +210,7 @@ def playlist():
 
     data = request.get_json()
     body = {
-        'name': f'Recs for {data.get('track')} by {data.get('artist')}'
+        'name': f"Recs for {data.get('track')} by {data.get('artist')}"
     }
 
     response = requests.post(url, headers=headers, json=body)
