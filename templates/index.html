@@ -147,7 +147,7 @@
             
             dropdown.style.display = "block";
 
-            fetch(`http://127.0.0.1:8888/search?q=${encodeURIComponent(query)}`)
+            fetch(`https://recsplus.onrender.com/search?q=${encodeURIComponent(query)}`)
                 .then(res => res.json())
                 .then(data => {
                     const tracks = data?.tracks?.items;
