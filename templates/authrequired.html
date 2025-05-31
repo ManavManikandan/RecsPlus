@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@400;700&family=Lexend+Deca:wght@100..900&display=swap');
+</style>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>RecsPlus - Home</title>
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+</head>
+        
+
+<header>
+    <div id="top-header">
+        <div id="logo">
+            <img src="{{ url_for('static', filename='R+.png') }}">
+            <h2 id="header-text">
+                RecsPlus
+            </h2>
+        </div>
+
+        <nav id="menu">
+            <ul>
+                <li class="active">
+                    <a href="home">Home</a>
+                </li>
+                <li>
+                    <a href="/">Get Recs</a>
+                </li>
+                <li>
+                    <a href="#">Privacy Policy</a>
+                </li>
+                <li>
+                    <a href="#">Log Out</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+    
+<body>
+
+    <div class="section-one-box">
+        <!--        <img id="intro-img" src="{{ url_for('static', filename='landingpage.jpg') }}"> -->
+        <!-- <div class="vl"></div> -->
+        <div class="blob1"></div>
+        <div class="blob2"></div>
+        <div id="title-box">
+            <h1>RecsPlus</h1>
+        </div>
+        <div id="text-box-one">
+            <p>Better recommendations for your favorite tracks.</p>
+            <p>Your way.</p>
+            <button id="login-button" onclick="loginRedirect()">Login with Spotify</button>
+        </div>
+    </div>
+
+    <div class="section-two-box">
+        <div class="info-box" id="tags-info-box">
+            <h2>Tags <i class="uil uil-tag"></i></h2>
+            <ul>
+                <li><p><i class="uil uil-arrow-right"></i>Add your own descriptive tags to <span>narrow down your target vibe</span></p></li>
+                <li><p><i class="uil uil-arrow-right"></i>Tags filter based on <span>genre, vibe, and mood</span></p></li>
+                <li><p><i class="uil uil-arrow-right"></i>Use multiple tags to get niche songs</p></li>
+            </ul>
+        </div>
+        <div class="info-box" id="target-popularity-info-box">
+            <h2>Target Popularity <i class="uil uil-arrow-growth"></i></h2>
+            <ul>
+                <li><p><i class="uil uil-arrow-right"></i>Adjusts the "mainstream vs. underground" balance of your recommendations</p></li>
+                <li><p><i class="uil uil-arrow-right"></i>Can get tracks lower than <span>10M streams</span> for <span>extremely</span> underground recommendations</p></li>
+            </ul>
+        </div>
+        <div class="info-box" id="emotion-info-box">
+            <h2>Target Emotion <i class="uil uil-grin"></i></h2>
+            <ul>
+                <li><p><i class="uil uil-arrow-right"></i>For the playlist curators, fine-tune your mix by controlling whether tracks flow by <span>sound</span> or by <span>story</span></p></li>
+                <li><p><i class="uil uil-arrow-right"></i>Get more lyrically/emotionally similar results</p></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="section-three-box">
+
+
+
+    </div>
+
+</body>
+
+<footer>
+    <div class="footer-line"></div>
+    <h6>Made by: <a href="https://www.linkedin.com/in/manavmani/">Manav Manikandan</a></h6>
+</footer>
+
+<style>
+
+html, body{
+    height: 100%;
+    font-family: "lexend-deca", sans-serif;
+}
+    
+body{
+    margin: 0px;
+    padding: 10px;
+    background: #161616;
+    font-family: "lexend-deca", sans-serif;
+    font-size: 12pt;
+}
+        
+h1, h2, h3{
+    margin: 0;
+    padding: 0;
+    color: #FFFFFF;
+}
+    
+p, ol, ul{
+    margin-top: 0;
+}
+
+p {
+    line-height: 180%;
+}
+
+ol, ul{
+    padding: 0;
+    list-style: none;
+}
+    
+.container{    
+    /* Set width of container to 
+        1200px and align center */
+    margin: 0px auto;
+    width: 1200px;
+    z-index: 3;
+}
+
+
+header{
+    overflow: hidden;
+}
+
+#top-header{
+    height: 60px;
+    text-align: center;
+    background: #161616;
+    z-index: 3;
+
+}
+ 
+#logo{
+    float: left;
+    margin: none;
+    padding-left: 10px;
+    padding-top: 5px;
+    vertical-align: baseline;
+    height: 60px;
+    width: 200px;
+    font-family: "Lexend Deca", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 20pt;
+    display: flex;
+}
+
+#logo img {
+    width: 80%;
+    height: 80%;
+    margin-right: 5px;
+    border-width: 1px;
+    border-color: #FFF;
+    border-style: solid;
+}
+
+#menu{
+    float: right;
+    width: 70%;
+    height: 100%;
+    margin: none;
+}
+    
+#menu ul{
+    text-align: center;
+    float: right;
+    margin: none;
+    background: #161616;
+}
+    
+#menu li{
+    display: inline-block;
+    padding: none;
+    margin: none;
+}
+    
+#menu li a, #menu li span{
+    display: inline-block;
+    padding: 0em 1.5em;
+    text-decoration: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    line-height: 60px;
+    font-family: "lexend-deca", sans-serif;
+    letter-spacing: 1px;
+}
+    
+#menu li a{
+    color: #FFF;
+}
+    
+#menu li:hover a, #menu li span{
+    background: #FFF;
+    color: #161616;
+    border-left: 1px solid #161616;
+    text-decoration: none;
+}
+
+
+/* Section One */
+
+
+
+
+.section-one-box {
+    overflow: hidden;
+    position: relative;
+    width: auto;
+    height: auto;
+    background: #292929;
+    padding: 25px 0px;
+    margin: 15px 0px;
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+    
+}
+
+.blob1 {
+  position: absolute;
+  top: 100px;
+  left:-100px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle at center, #185AD1, #185AD1, transparent 70%);
+  filter: blur(300px);
+  z-index: 1;
+  opacity: 0.8;
+}
+
+.blob2 {
+  position: absolute;
+  top: -300px;
+  right: -100px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle at center, #185AD1, #185AD1, transparent 50%);
+  filter: blur(400px);
+  z-index: 1;
+  opacity: 0.8;
+}
+
+
+#title-box {
+    text-align: center;
+    font-family: "lexend-deca", sans-serif;
+    font-size: 80px;
+    margin-top: 80px;
+}
+
+#text-box-one {
+    text-align: center;
+    margin-left: 10px;
+    margin-bottom: 60px;
+}
+
+.section-one-box p {
+    font-family: "lexend-deca", sans-serif;
+    font-weight: 400;
+    font-size: 16pt;
+    align: right;
+    margin-bottom: 0px;
+    color: #FFF;
+
+}
+
+#login-button {
+   -webkit-appearance: none;
+    
+    margin-top: 30px;
+    background: #1ed760;
+    border-color: #1ed760;
+    border-radius: 4px;
+    font-size: 16pt;
+    font-family: "lexend-deca", sans-serif;
+    padding: 8px 12px;
+    font-weight: 600;
+    text-align: center;
+    width: auto;
+    height: auto;
+
+}
+
+#login-button:hover {
+    background: #FFF;
+    color: #000;
+    background: #1ed760;
+    transition: 0.2s;
+}
+
+
+/* section two box */
+
+.section-two-box {
+    display: flex;
+    justify-content: space-between;
+    height: auto;
+    margin: 20px 0px;
+    padding: 30px 0px;
+
+}
+
+.info-box {
+    flex: 1;              
+    text-align: center;
+}
+
+.section-two-box h2 {
+    margin-bottom: 30px;
+}
+
+.section-two-box ul {
+    text-align: left;
+    margin-left: 10px;
+}
+
+.section-two-box ul span {
+    font-weight: 700;
+}
+
+.section-two-box ul li {
+    color: #FFF;
+    font-family: "lexend-deca", sans-serif;
+    font-size: 14pt;
+}
+
+.section-two-box ul li p {
+    color: #FFF;
+    font-family: "lexend-deca", sans-serif;
+    font-size: 16pt;
+    font-weight: 200;
+    margin-bottom: 6px;
+}
+
+/* footer stuff here */
+
+footer {
+    display: center;
+    justify-content: block;
+    align-items: center;
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+footer h6 {
+    font-family: "lexend-deca", sans-serif;
+    font-size: 12pt;
+    font-weight: 500;
+    color: #FFF;    
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+footer .footer-line {
+    width: 100%;
+    height: 1px;
+    background: #FFF;
+    margin-bottom: 0px;
+}
+
+</style>
+
+<script>
+    function redirect(endpoint){
+        var paths = window.location;
+        var url = `${paths.origin}/${endpoint}`
+        return url
+    }
+
+    function loginRedirect() {
+        window.location.href = redirect('login');
+    }
+
+
+</script>
+
+
+</html>

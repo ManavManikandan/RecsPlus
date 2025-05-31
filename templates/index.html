@@ -1,0 +1,323 @@
+<!DOCTYPE html>   
+<html>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap');
+</style>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>RecsPlus - Get Recs</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+</head>
+        
+<body>
+    <header>
+        <div id="top-header">
+            <div id="logo">
+                <img src="{{ url_for('static', filename='R+.png') }}">
+                <h2 id="header-text">
+                    RecsPlus
+                </h2>
+            </div>
+
+
+            <nav id="menu">
+                <ul>
+                    <li class="active">
+                        <a href="home">Home</a>
+                    </li>
+                    <li>
+                        <a href="">Get Recs</a>
+                    </li>
+                    <li>
+                        <a href="#">Privacy Policy</a>
+                    </li>
+                    <li>
+                        <a href="logout">Log Out</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div id="main-settings">
+        <div id="album-art">
+            <img id="art" src="{{ url_for('static', filename='default.jpg') }}" alt="could not find album cover">
+        </div>
+     
+        <div id="settings-side">
+            <h4 class="text">
+                Track
+            </h4>
+            
+            <div class="search-tab" id="search-tab">
+                <div class="search-bar" id="search-container">
+                    <input type="text" id="search" oninput="handleSearch()" placeholder="e.g. White Ferrari" />
+                    <div class="dropdown-list" id="dropdown"></div>
+                </div>
+                <div class="selected-track" id="selected-track" style="display: none;"></div>
+            </div>
+
+            <h4 class="text" id="tags-text">
+                Tags (up to 5)
+            </h4>
+
+            <div class="tags-bar">
+                <div class="content-box">
+                    <p>Press Enter after each tag, up to 5 tags</p>               
+                    <ul id="tags-list"><input type="text" id="tags-search" placeholder="e.g. melancholy"/></ul>
+                </div>
+ 
+                <div class="details-box">
+                    <p><span>5</span> tags remaining</p>
+                    <button id="remove-tags" onclick="removeTags()">
+                        Remove All
+                    </button>
+                </div>
+            </div>
+            
+            <div id="popularity-box">
+                <div id="popularity-text-box">
+                    <h4 id="popularity-text">
+                        Target Popularity
+                    </h4>
+                    <p id="popval-container"><output id="sliderVal"></output></p>
+                </div>
+                <div class="slidecontainer">
+                    <input type="range" min="1" max="100" value="80" step="1" class="slider" id="target-popularity">
+                </div>
+            </div>
+
+            <div id="emotion-box">
+                <div id="emotion-text-box">
+                    <h4 id="emotion-text">
+                        Feeling or Listening?
+                    </h4>
+                    <p id="emoval-container"><output id="emoVal"></output></p>
+                </div>
+                <div class="slidecontainer">
+                    <input type="range" min="1" max="100" value="50" step="1" class="slider" id="target-emotion">
+                </div>
+                <div class="lyrical-text">
+                    <p id="text1"><i class="uil uil-arrow-left"></i>Emotional</p>
+                    <p id="text2">Lyrical<i class="uil uil-arrow-right"></i></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    
+    <div id="getrecs-button">
+        <button onclick="getRecs()">
+            Get Recommendations
+        </button>
+    </div>
+
+    <div id="loading-screen">
+        <div class="spinner"></div>
+            Getting your recommendations...
+    </div>
+
+</body>
+
+    <script>
+        const value = document.querySelector("#sliderVal");
+        const input = document.querySelector("#target-popularity");
+        value.textContent = input.value;
+        input.addEventListener("input", (event) => {
+          value.textContent = event.target.value;
+        });
+
+        const value2 = document.querySelector("#emoVal")
+        const input2 = document.querySelector("#target-emotion");
+        value2.textContent = input2.value;
+        input2.addEventListener("input", (event) => {
+          value2.textContent = event.target.value;
+        });
+
+
+        function handleSearch() { 
+            const query = document.getElementById("search").value.toLowerCase();
+            console.log(query);
+            const dropdown = document.getElementById("dropdown");
+            
+            dropdown.style.display = "block";
+
+            fetch(`http://127.0.0.1:8888/search?q=${encodeURIComponent(query)}`)
+                .then(res => res.json())
+                .then(data => {
+                    const tracks = data?.tracks?.items;
+
+                    dropdown.innerHTML = "";
+
+                    if (query.length === 0) return;
+
+                    const filtered = tracks.filter(tracks => 
+                        tracks.name.toLowerCase().includes(query)
+                    );
+
+                    filtered.forEach(tracks => {
+                        const item = document.createElement("div");
+                        item.classList.add("dropdown-item");
+                        
+
+                        item.innerHTML = `
+                            <img class="album-art" src="${tracks.album?.images?.[0]?.url || ''}" alt="Album Art">
+                            <div class="track-info">
+                                <div class="track-name">${tracks.name}</div>
+                                <div class="artist-name">${tracks.artists?.[0]?.name || 'Unknown Artist'}</div>
+                            </div>
+                        `;
+
+                        document.querySelector(".dropdown-list").appendChild(item);
+                });
+            })
+        }
+
+        
+
+        const dropdown = document.getElementById("dropdown");
+
+        dropdown.addEventListener("click", (event) => {
+            const item = event.target.closest(".dropdown-item");
+
+            if (item) {
+                const userName = item.querySelector(".track-info .track-name").textContent;
+                const userArtist = item.querySelector(".track-info .artist-name").textContent;
+                const userAlbumArt = item.querySelector(".album-art").src;
+
+                selectedTrack(userName, userArtist, userAlbumArt);
+
+            }
+        });
+
+        document.addEventListener("click", (event) => {
+            if (!dropdown.contains(event.target)) {
+                dropdown.style.display = "none";
+            }
+        });
+
+        function selectedTrack(name, artist, albumArt) {
+            const searchBar = document.getElementById("search-container");
+            const selectedTrackDiv = document.getElementById("selected-track");
+
+            const visualAlbumArt = document.getElementById("art");
+            visualAlbumArt.src = albumArt;
+
+            searchBar.style.display = "none";
+            selectedTrackDiv.style.display = "flex";
+            selectedTrackDiv.innerHTML = `
+                <div class="track-info">
+                    <div class="track-name">${name}</div>
+                    <div class="artist-name">${artist}</div>
+                </div>
+                    <button onclick="editTrack()" class="edit-button">Edit</button></div>
+            `;
+        }
+
+        function editTrack() { 
+            const searchBar = document.getElementById("search-container");
+            const selectedTrackDiv = document.getElementById("selected-track");
+            searchBar.style.display = "block";
+            selectedTrackDiv.style.display = "none";
+
+        }
+
+        const ul = document.querySelector("#tags-list");
+        const input3 = ul.querySelector("#tags-search");
+        const countNum = document.querySelector(".details-box span");
+        let tags = [];
+
+        function countTag() {
+            countNum.innerText = 5 - tags.length;
+        }
+
+
+        function createTag() {
+            ul.querySelectorAll("li").forEach(li => li.remove());
+            tags.forEach(tag => {
+                let liTag = `<li>${tag} <i class="uil uil-multiply"onClick="remove(this, '${tag}')"></i></li>`;
+                ul.insertAdjacentHTML("afterbegin", liTag);
+            });
+            countTag();
+        }
+
+        function remove(element, tag) {
+            let index = tags.indexOf(tag);
+
+            tags = [...tags.slice(0, index), ...tags.slice(1 + index)];
+            element.parentElement.remove();
+            countTag();
+        }
+
+
+        function addTag(e) {
+            if (e.key == "Enter") {
+                let tag = e.target.value.replace(/\s+/g, ' ');
+                console.log(tag);
+
+                if (tags.length < 5 && !tags.includes(tag)) {
+                    tag.split(',').forEach(tag => {
+                        tags.push(tag);
+                        console.log(tags);
+                        createTag();
+                        input3.value = "";
+                    });
+
+                }
+            }
+            countTag();
+        }
+
+        function removeTags() {
+            ul.querySelectorAll("li").forEach(li => li.remove());
+            tags = [];
+            countTag();
+        }
+
+        input3.addEventListener("keyup", addTag);
+
+        
+
+        function getRecs() {
+            const loading = document.getElementById('loading-screen');
+            const selectedTrackDiv = document.getElementById("selected-track");
+            const usersTrack = selectedTrackDiv.querySelector(".track-name").textContent;
+            sessionStorage.setItem('track', usersTrack);
+            const usersTrackArtist = selectedTrackDiv.querySelector(".artist-name").textContent;
+            sessionStorage.setItem('artist', usersTrackArtist);
+            const popularityVal = document.querySelector("#target-popularity").value;
+            const emotionVal = document.querySelector("#target-emotion").value;
+            loading.style.display = 'block';
+            fetch('/recommend', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    song: usersTrack,
+                    artist: usersTrackArtist,
+                    tags: tags,
+                    popularity: popularityVal,
+                    emotion: emotionVal
+                })
+            })
+
+                .then(response => response.json())
+                .then(json => {  
+                    sessionStorage.setItem('recommendations', JSON.stringify(json.recommendations));
+
+                    window.location.href = '/results';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+    </script>
+
+</html>
+
