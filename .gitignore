@@ -1,9 +1,16 @@
+# Python cache files
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
+*.py[cod]
+
+# Environment variables file
 .env
-venv/
-.env.*
+
+# macOS system files
 .DS_Store
-lastfm.py
+
+# Editor backups and swap files
+*.swp
+*.swo
+
+# Logs
+*.log
