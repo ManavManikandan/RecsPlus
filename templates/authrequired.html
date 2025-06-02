@@ -7,7 +7,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RecsPlus - Home</title>
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
 </head>
@@ -21,9 +21,13 @@
                 RecsPlus
             </h2>
         </div>
+        
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <i class="uil uil-bars"></i>
+        </div>
 
         <nav id="menu">
-            <ul>
+            <ul id="menu-list">
                 <li class="active">
                     <a href="home">Home</a>
                 </li>
@@ -135,89 +139,145 @@ ol, ul{
     /* Set width of container to 
         1200px and align center */
     margin: 0px auto;
-    width: 1200px;
+    width: 10vw;
     z-index: 3;
 }
-
 
 header{
     overflow: hidden;
+    width: 100%;
 }
 
 #top-header{
-    height: 60px;
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: auto;
+    flex-wrap: wrap;
     background: #161616;
     z-index: 3;
+    width: auto;
 
 }
  
 #logo{
-    float: left;
-    margin: none;
-    padding-left: 10px;
-    padding-top: 5px;
-    vertical-align: baseline;
-    height: 60px;
-    width: 200px;
-    font-family: "Lexend Deca", sans-serif;
-    font-weight: 600;
-    font-style: normal;
-    font-size: 20pt;
     display: flex;
+    align-items: center;
+    font-size: 1.5rem;
 }
 
 #logo img {
-    width: 80%;
-    height: 80%;
+    width: auto;
+    height: auto;
+    max-height: 40px;
+    max-width: 100%;
     margin-right: 5px;
     border-width: 1px;
     border-color: #FFF;
     border-style: solid;
 }
-
-#menu{
+ 
+.menu-toggle {
+    display: none;
+    font-size: 2em;
+    color: #FFF;
     float: right;
-    width: 70%;
-    height: 100%;
-    margin: none;
 }
-    
+
 #menu ul{
     text-align: center;
     float: right;
-    margin: none;
+    margin: 0px;
     background: #161616;
-}
-    
-#menu li{
-    display: inline-block;
-    padding: none;
-    margin: none;
-}
-    
-#menu li a, #menu li span{
-    display: inline-block;
-    padding: 0em 1.5em;
-    text-decoration: none;
-    font-weight: 600;
-    text-transform: uppercase;
-    line-height: 60px;
-    font-family: "lexend-deca", sans-serif;
-    letter-spacing: 1px;
-}
-    
-#menu li a{
-    color: #FFF;
-}
-    
-#menu li:hover a, #menu li span{
-    background: #FFF;
-    color: #161616;
-    border-left: 1px solid #161616;
-    text-decoration: none;
+
 }
 
+
+@media (min-width: 800px) {
+    #menu{
+        display: flex; 
+        align-items: center;
+        justify-content: flex-end;
+        flex: 1 1;
+    }
+        
+    #menu ul{
+        text-align: center;
+        float: right;
+        margin: none;
+        background: #161616;
+    }
+        
+    .menu-toggle {
+        display: none;
+    }
+
+    #menu li{
+        display: inline-block;
+        padding: none;
+        margin: none;
+    }
+        
+    #menu li a, #menu li span{
+        display: inline-block;
+        padding: 0em 1.5em;
+        text-decoration: none;
+        font-weight: 600;
+        text-transform: uppercase;
+        line-height: 60px;
+        font-family: "lexend-deca", sans-serif;
+        letter-spacing: 1px;
+    }
+        
+    #menu li a{
+        color: #FFF;
+    }
+        
+    #menu li:hover a, #menu li span{
+        background: #FFF;
+        color: #161616;
+        border-left: 1px solid #161616;
+        text-decoration: none;
+    }
+}
+
+@media (max-width: 800px) {
+    #top-header {
+        
+    }
+
+    .menu-toggle {
+        display: block;
+        float: right;
+    }
+
+    #menu {
+        display: none;
+        max-width: 0px;
+        position: absolute;
+        top: 0.5%;
+        left: 100%;
+    }
+
+    #menu ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        position: absolute;
+        top: 60px;
+        min-width: 160px;
+        z-index: 100;
+    }
+
+    #menu li {
+        padding: 0.5em;
+    }
+
+    #logo {
+        font-size: 5vw;
+        float: right;
+    }
+}
 
 /* Section One */
 
@@ -241,13 +301,14 @@ header{
 .blob1 {
   position: absolute;
   top: 100px;
-  left:-100px;
+  left: -100px;
   width: 500px;
   height: 500px;
   background: radial-gradient(circle at center, #185AD1, #185AD1, transparent 70%);
   filter: blur(300px);
   z-index: 1;
   opacity: 0.8;
+  pointer-events: none;
 }
 
 .blob2 {
@@ -259,6 +320,7 @@ header{
   background: radial-gradient(circle at center, #185AD1, #185AD1, transparent 50%);
   filter: blur(400px);
   z-index: 1;
+  pointer-events: none;
   opacity: 0.8;
 }
 
@@ -266,20 +328,19 @@ header{
 #title-box {
     text-align: center;
     font-family: "lexend-deca", sans-serif;
-    font-size: 80px;
+    font-size: 6vw;
     margin-top: 80px;
 }
 
 #text-box-one {
     text-align: center;
-    margin-left: 10px;
     margin-bottom: 60px;
 }
 
 .section-one-box p {
     font-family: "lexend-deca", sans-serif;
     font-weight: 400;
-    font-size: 16pt;
+    font-size: 3vw;
     align: right;
     margin-bottom: 0px;
     color: #FFF;
@@ -293,13 +354,14 @@ header{
     background: #1ed760;
     border-color: #1ed760;
     border-radius: 4px;
-    font-size: 16pt;
+    font-size: clamp(14px, 3vw, 22px);
     font-family: "lexend-deca", sans-serif;
     padding: 8px 12px;
     font-weight: 600;
     text-align: center;
     width: auto;
     height: auto;
+    z-index: 5;
 
 }
 
@@ -329,6 +391,7 @@ header{
 
 .section-two-box h2 {
     margin-bottom: 30px;
+    font-size: clamp(3vw, 5vw, 24pt);
 }
 
 .section-two-box ul {
@@ -343,15 +406,30 @@ header{
 .section-two-box ul li {
     color: #FFF;
     font-family: "lexend-deca", sans-serif;
-    font-size: 14pt;
+    font-size: clamp(2vw, 3vw, 1em);
 }
 
 .section-two-box ul li p {
     color: #FFF;
     font-family: "lexend-deca", sans-serif;
-    font-size: 16pt;
+    font-size: clamp(2vw, 3vw, 1em);
     font-weight: 200;
     margin-bottom: 6px;
+}
+
+@media (max-width: 1000px) {
+    .section-two-box {
+        display: block;
+        justify-content: space-between;
+        height: auto;
+        margin: 20px 0px;
+        padding: 0;
+    }
+
+    .info-box {
+        margin: 30px 10px;
+    }
+
 }
 
 /* footer stuff here */
@@ -392,7 +470,16 @@ footer .footer-line {
     function loginRedirect() {
         window.location.href = redirect('login');
     }
-
+    
+    function toggleMenu() {
+        const menu = document.getElementById("menu");
+        if (menu.style.display === "flex") {
+            menu.style.display = "none";
+        } else {
+            menu.style.display = "flex";
+        }      
+        console.log(menu.style.display);
+    }
 
 </script>
 
