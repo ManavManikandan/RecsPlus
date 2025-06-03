@@ -146,13 +146,14 @@ ol, ul{
 header{
     overflow: hidden;
     width: 100%;
+    height: clamp(60px, 5vw, 5vw);
 }
 
 #top-header{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: auto;
+    height: 100%;
     flex-wrap: wrap;
     background: #161616;
     z-index: 3;
@@ -163,7 +164,7 @@ header{
 #logo{
     display: flex;
     align-items: center;
-    font-size: 1.5rem;
+    font-size: clamp(10pt, 4vw, 35pt);
 }
 
 #logo img {
@@ -251,6 +252,7 @@ header{
         float: right;
         margin: none;
         background: #161616;
+        font-size: clamp(12pt, 100%, 30pt);
     }
         
     .menu-toggle {
@@ -295,9 +297,18 @@ header{
     }
 
     #logo {
-        font-size: 5vw;
+        font-size: clamp(20pt, 5vw, 20pt);
         float: right;
     }
+
+    body::-webkit-scrollbar {
+        display: none;
+    }
+    body {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
 }
 
 /* Section One */
@@ -433,7 +444,7 @@ header{
 .section-two-box ul li p {
     color: #FFF;
     font-family: "lexend-deca", sans-serif;
-    font-size: clamp(2vw, 3vw, 1em);
+    font-size: clamp(2vw, 3vw, 16pt);
     font-weight: 200;
     margin-bottom: 6px;
 }
