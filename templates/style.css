@@ -49,60 +49,57 @@ ol, ul{
 
 header{
     overflow: hidden;
+    width: 100%;
+    height: clamp(44px, 4vw, 4vw);
+    padding: 8px 0px;
 }
 
 #top-header{
-    height: 60px;
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
     background: #161616;
     z-index: 3;
+    width: auto;
 
+}
+
+#header-text {
 }
  
 #logo{
-    float: left;
-    margin: none;
-    padding-left: 10px;
-    padding-top: 5px;
-    vertical-align: baseline;
-    height: 60px;
-    width: 200px;
-    font-family: "Lexend Deca", sans-serif;
-    font-weight: 600;
-    font-style: normal;
-    font-size: 20pt;
     display: flex;
+    align-items: center;
+    font-size: clamp(10pt, 4vw, 34px);
 }
 
 #logo img {
-    width: 80%;
-    height: 80%;
+    width: auto;
+    height: auto;
+    max-height: 40px;
+    max-width: 100%;
     margin-right: 5px;
     border-width: 1px;
     border-color: #FFF;
     border-style: solid;
 }
-
-#menu{
+ 
+.menu-toggle {
+    display: none;
+    font-size: 2em;
+    color: #FFF;
     float: right;
-    width: 70%;
-    height: 100%;
-    margin: none;
 }
-    
+
 #menu ul{
     text-align: center;
     float: right;
-    margin: none;
+    margin: 0px;
     background: #161616;
+
 }
-    
-#menu li{
-    display: inline-block;
-    padding: none;
-    margin: none;
-}
-    
+
 #menu li a, #menu li span{
     display: inline-block;
     padding: 0em 1.5em;
@@ -113,16 +110,113 @@ header{
     font-family: "lexend-deca", sans-serif;
     letter-spacing: 1px;
 }
-    
+
 #menu li a{
     color: #FFF;
 }
-    
+
 #menu li:hover a, #menu li span{
     background: #FFF;
     color: #161616;
     border-left: 1px solid #161616;
     text-decoration: none;
+}
+
+#menu{
+    display: flex; 
+    align-items: center;
+    justify-content: flex-end;
+    flex: 1 1;
+}
+    
+#menu ul{
+    text-align: center;
+    float: right;
+    margin: none;
+    background: #161616;
+}
+    
+.menu-toggle {
+    display: none;
+}
+
+#menu li{
+    display: inline-block;
+    padding: none;
+    margin: none;
+}
+
+@media (min-width: 800px) {
+    #menu{
+        display: flex; 
+        align-items: center;
+        justify-content: flex-end;
+        flex: 1 1;
+    }
+        
+    #menu ul{
+        text-align: center;
+        float: right;
+        margin: none;
+        background: #161616;
+        font-size: clamp(12pt, 100%, 30pt);
+    }
+        
+    .menu-toggle {
+        display: none;
+    }
+
+    #menu li{
+        display: inline-block;
+        padding: none;
+        margin: none;
+    }
+        
+
+}
+
+@media (max-width: 800px) {
+    .menu-toggle {
+        display: block;
+        float: right;
+    }
+
+    #menu {
+        display: none;
+        max-width: 0px;
+        position: absolute;
+        top: 0.5%;
+        left: 100%;
+    }
+
+    #menu ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        position: absolute;
+        top: 60px;
+        min-width: 160px;
+        z-index: 100;
+    }
+
+    #menu li {
+        white-space: nowrap;
+    }
+
+
+    #logo {
+        font-size: clamp(20pt, 5vw, 20pt);
+        float: right;
+    }
+
+    body::-webkit-scrollbar {
+        display: none;
+    }
+    body {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
 }
 
 
@@ -146,8 +240,8 @@ header{
 
 #album-art {
     float: left;
-    width: 50%;
-    height: 50%;
+    width: 100%;
+    height: 100%;
     text-align: right;
     padding-right: 10px;
 }
@@ -160,18 +254,20 @@ header{
 h4 {
     background: #185ADB;
     padding: 10px;
+    padding-right: 0px;
     margin-right: 10px;
     font-family: "lexend-deca", sans-serif;
     color: #FFFFFF;
     border: 1px;
     border-radius: 10px;
     width: 100%;
-
+    box-sizing: border-box;
 }
 
 #tags-text {
     background: #185ADB;
     padding: 10px;
+    padding-right: 0px;
     margin-right: 10px;
     font-family: "lexend-deca", sans-serif;
     color: #FFFFFF;
@@ -181,6 +277,23 @@ h4 {
     margin-bottom: 0px;
 }
 
+
+@media (max-width: 800px) {
+    #main-settings {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #album-art {
+        width: auto;
+        height: auto;
+    }
+
+    #settings-side {
+        width: 80vw;
+    }
+}
+
 /* Search Bar Stuff */
 
 .search-box {
@@ -188,6 +301,7 @@ h4 {
     width: 100%;
     margin: 0 auto;
     text-align: center;
+
 }
 
 .search-bar {
@@ -195,7 +309,7 @@ h4 {
     width: 100%;
     margin: 0 auto;
     text-align: center;
-    
+    box-sizing: border-box;    
 }
 
 .selected-track {
@@ -244,12 +358,15 @@ h4 {
 #search {
       width: 100%;
       padding: 6px;
+      padding-right: 0px;
       font-size: 16px;
       border-color: #FFF;
       border-radius: 1px;
       height: 50px;
       background: #161616;
       color: #FFF;
+      box-sizing: border-box;
+
 }
 
 .dropdown-list {
@@ -314,11 +431,12 @@ h4 {
 /* Tag Bar stuff*/
 
 .tags-bar {
-    margin-left: 10px;
     width: 100%; 
     align-items: center;
     font-family: "lexend-deca", sans-serif;
     font-weight: 400;
+    box-sizing: border-box;
+
 }
 
 .content-box p {
@@ -332,9 +450,11 @@ h4 {
     display: flex; 
     border: 1px solid #FFF;
     padding: 7px;
+    padding-right: 0px;
     margin-bottom: 0px;
     font-family: "lexend-deca", sans-serif;
     flex-wrap: wrap;
+    box-sizing: border-box;
 }
 
 .content-box ul li {
@@ -369,6 +489,8 @@ h4 {
     background: #161616;
     color: #FFF;
     border-color: #FFF;
+    box-sizing: border-box;
+
 }
 
 .details-box {
@@ -447,13 +569,10 @@ input[type="range"]::-moz-range-thumb {
   cursor: grab;
 }
 
-
-
 .slidecontainer {
     width: 100%;
     max-width: 1000px;
     align-items: center;
-
 }
 
 .slider {
@@ -476,12 +595,12 @@ input[type="range"]::-moz-range-thumb {
 #popularity-box {
     background: #185ADB;
     padding: 0px 10px;
-    margin-right: 10px;
     color: #FFFFFF;
     border: 1px;
     border-radius: 10px;
     width: 100%;
     max-width: 1000px;
+    box-sizing: border-box;
 }
 
 
@@ -534,6 +653,7 @@ input[type="range"]::-moz-range-thumb {
     border-radius: 10px;
     width: 100%;
     max-width: 1000px;
+    box-sizing: border-box;
 }
 
 
@@ -592,6 +712,7 @@ input[type="range"]::-moz-range-thumb {
     justify-content: center;
     align-items: center;
     margin: 20px;
+    box-sizing: border-box;
 }
 
 #getrecs-button button {
@@ -600,11 +721,12 @@ input[type="range"]::-moz-range-thumb {
     border: 1px solid #185ADB;
     border-radius: 10px;
     cursor: pointer;
-    font-size: 24pt;
+    font-size: clamp(2vh, 3vh, 24pt);
     height: auto;
     padding: 8px;
     font-family: "lexend-deca", sans-serif;
     font-weight: 800;
+
 }
 
     #loading-screen {

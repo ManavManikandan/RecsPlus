@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>RecsPlus - Get Recs</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
 </head>
         
@@ -21,6 +22,10 @@
                 <h2 id="header-text">
                     RecsPlus
                 </h2>
+            </div>
+
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <i class="uil uil-bars"></i>
             </div>
 
 
@@ -316,6 +321,16 @@
                 .catch(error => {
                     console.error('Error:', error);
                 });
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById("menu");
+            if (menu.style.display === "flex") {
+                menu.style.display = "none";
+            } else {
+                menu.style.display = "flex";
+            }
+            console.log(menu.style.display);
         }
     </script>
 
