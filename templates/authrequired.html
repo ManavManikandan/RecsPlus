@@ -146,7 +146,8 @@ ol, ul{
 header{
     overflow: hidden;
     width: 100%;
-    height: clamp(60px, 5vw, 5vw);
+    height: clamp(44px, 4vw, 4vw);
+    padding: 8px 0px;
 }
 
 #top-header{
@@ -154,17 +155,19 @@ header{
     justify-content: space-between;
     align-items: center;
     height: 100%;
-    flex-wrap: wrap;
     background: #161616;
     z-index: 3;
     width: auto;
 
 }
+
+#header-text {
+}
  
 #logo{
     display: flex;
     align-items: center;
-    font-size: clamp(10pt, 4vw, 35pt);
+    font-size: clamp(10pt, 4vw, 34px);
 }
 
 #logo img {
@@ -293,8 +296,9 @@ header{
     }
 
     #menu li {
-        padding: 0.5em;
+        white-space: nowrap;
     }
+
 
     #logo {
         font-size: clamp(20pt, 5vw, 20pt);
@@ -322,7 +326,7 @@ header{
     width: auto;
     height: auto;
     background: #292929;
-    padding: 25px 0px;
+    padding: 15px 0px;
     margin: 15px 0px;
     display: flex;
     flex-direction: column;
@@ -360,7 +364,7 @@ header{
 #title-box {
     text-align: center;
     font-family: "lexend-deca", sans-serif;
-    font-size: 6vw;
+    font-size: clamp(3vw, 8vw, 50px);
     margin-top: 80px;
 }
 
@@ -372,7 +376,7 @@ header{
 .section-one-box p {
     font-family: "lexend-deca", sans-serif;
     font-weight: 400;
-    font-size: 3vw;
+    font-size: clamp(1vw, 3vw, 16px);
     align: right;
     margin-bottom: 0px;
     color: #FFF;
@@ -422,8 +426,8 @@ header{
 }
 
 .section-two-box h2 {
-    margin-bottom: 30px;
-    font-size: clamp(3vw, 5vw, 24pt);
+    margin-bottom: 10px;
+    font-size: clamp(3vw, 5vw, 20pt);
 }
 
 .section-two-box ul {
@@ -438,13 +442,13 @@ header{
 .section-two-box ul li {
     color: #FFF;
     font-family: "lexend-deca", sans-serif;
-    font-size: clamp(2vw, 3vw, 1em);
+    font-size: clamp(1vw, 3vw, 12pt);
 }
 
 .section-two-box ul li p {
     color: #FFF;
     font-family: "lexend-deca", sans-serif;
-    font-size: clamp(2vw, 3vw, 16pt);
+    font-size: clamp(1vw, 3vw, 12pt);
     font-weight: 200;
     margin-bottom: 6px;
 }
