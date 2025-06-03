@@ -21,6 +21,10 @@
             </h2>
         </div>
 
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <i class="uil uil-bars"></i>
+        </div>
+
         <nav id="menu">
             <ul>
                 <li class="active">
@@ -107,60 +111,57 @@ ol, ul{
 
 header{
     overflow: hidden;
+    width: 100%;
+    height: clamp(44px, 4vw, 4vw);
+    padding: 8px 0px;
 }
 
 #top-header{
-    height: 60px;
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
     background: #161616;
     z-index: 3;
+    width: auto;
 
+}
+
+#header-text {
 }
  
 #logo{
-    float: left;
-    margin: none;
-    padding-left: 10px;
-    padding-top: 5px;
-    vertical-align: baseline;
-    height: 60px;
-    width: 200px;
-    font-family: "Lexend Deca", sans-serif;
-    font-weight: 600;
-    font-style: normal;
-    font-size: 20pt;
     display: flex;
+    align-items: center;
+    font-size: clamp(10pt, 4vw, 34px);
 }
 
 #logo img {
-    width: 80%;
-    height: 80%;
+    width: auto;
+    height: auto;
+    max-height: 40px;
+    max-width: 100%;
     margin-right: 5px;
     border-width: 1px;
     border-color: #FFF;
     border-style: solid;
 }
-
-#menu{
+ 
+.menu-toggle {
+    display: none;
+    font-size: 2em;
+    color: #FFF;
     float: right;
-    width: 70%;
-    height: 100%;
-    margin: none;
 }
-    
+
 #menu ul{
     text-align: center;
     float: right;
-    margin: none;
+    margin: 0px;
     background: #161616;
+
 }
-    
-#menu li{
-    display: inline-block;
-    padding: none;
-    margin: none;
-}
-    
+
 #menu li a, #menu li span{
     display: inline-block;
     padding: 0em 1.5em;
@@ -171,16 +172,113 @@ header{
     font-family: "lexend-deca", sans-serif;
     letter-spacing: 1px;
 }
-    
+
 #menu li a{
     color: #FFF;
 }
-    
+
 #menu li:hover a, #menu li span{
     background: #FFF;
     color: #161616;
     border-left: 1px solid #161616;
     text-decoration: none;
+}
+
+#menu{
+    display: flex; 
+    align-items: center;
+    justify-content: flex-end;
+    flex: 1 1;
+}
+    
+#menu ul{
+    text-align: center;
+    float: right;
+    margin: none;
+    background: #161616;
+}
+    
+.menu-toggle {
+    display: none;
+}
+
+#menu li{
+    display: inline-block;
+    padding: none;
+    margin: none;
+}
+
+@media (min-width: 800px) {
+    #menu{
+        display: flex; 
+        align-items: center;
+        justify-content: flex-end;
+        flex: 1 1;
+    }
+        
+    #menu ul{
+        text-align: center;
+        float: right;
+        margin: none;
+        background: #161616;
+        font-size: clamp(12pt, 100%, 30pt);
+    }
+        
+    .menu-toggle {
+        display: none;
+    }
+
+    #menu li{
+        display: inline-block;
+        padding: none;
+        margin: none;
+    }
+        
+
+}
+
+@media (max-width: 800px) {
+    .menu-toggle {
+        display: block;
+        float: right;
+    }
+
+    #menu {
+        display: none;
+        max-width: 0px;
+        position: absolute;
+        top: 0.5%;
+        left: 100%;
+    }
+
+    #menu ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        position: absolute;
+        top: 60px;
+        min-width: 160px;
+        z-index: 100;
+    }
+
+    #menu li {
+        white-space: nowrap;
+    }
+
+
+    #logo {
+        font-size: clamp(20pt, 5vw, 20pt);
+        float: right;
+    }
+
+    body::-webkit-scrollbar {
+        display: none;
+    }
+    body {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
 }
 
 
@@ -231,7 +329,7 @@ h1 {
 }
 
 #list-div ul li {
-    color: #FFF;
+    color: #fff;
     font-size: 14pt;
 }
 
@@ -249,6 +347,20 @@ h1 {
 
 #embed {
     margin: 20px 0px; 
+
+}
+
+@media (max-width: 800px) {
+    #list-div ul {
+        -moz-column-count: 1;
+        -moz-column-gap: 10px;
+        -webkit-column-count: 1;
+        -webkit-column-gap: 10px;
+        column-count: 1;
+        column-gap: 10px;
+        text-align: left;
+    }
+
 
 }
 
@@ -303,6 +415,15 @@ function makePlaylist() {
         console.error('Error:', error);
     });
 
+}
+
+function toggleMenu() {
+    const menu = document.getElementById("menu");
+    if (menu.style.display === "flex") {
+        menu.style.display = "none";
+    } else {
+        menu.style.display = "flex";
+    }
 }
 
 
