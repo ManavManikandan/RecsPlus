@@ -155,9 +155,8 @@
             fetch(`/search?q=${encodeURIComponent(query)}`)
                 .then(res => res.json())
                 .then(data => {
-                    console.log()
                     const tracks = data?.tracks?.items ?? [];
-
+                    console.log(data)
                     if (query.length === 0) return;
 
                     const filtered = tracks.filter(track => 
