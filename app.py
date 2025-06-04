@@ -151,6 +151,8 @@ def refresh_token():
 def loginRequired():
     return render_template("authrequired.html")
 
+
+
 @app.route('/results')
 def results():
     return render_template("recs.html")
@@ -256,6 +258,7 @@ def Search():
 
     query = request.args.get('q','')
     result = getSearch(query)
+    print(result)
     return jsonify(result)
 
 def get_album_details(album_id, access_token):
