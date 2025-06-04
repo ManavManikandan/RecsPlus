@@ -251,6 +251,9 @@ def playlist():
 
 @app.route('/search')
 def Search():
+    if 'access_token' not in session:
+        return jsonify({'error': 'User not authenticated'}), 401
+
     query = request.args.get('q','')
     result = getSearch(query)
     return jsonify(result)
