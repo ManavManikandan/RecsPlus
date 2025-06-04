@@ -164,6 +164,8 @@ def getSearch(query):
 
     access_token = session['access_token']
 
+    print("access_token: ", access_token)
+
     headers = {
         'Authorization': f'Bearer {access_token}'
     }
@@ -178,7 +180,7 @@ def getSearch(query):
 
     if response.status_code == 200:
         query_data = response.json()
-        print("query data: ", query_data)
+        print("query_data: ", query_data)
         return query_data
     else: 
         print(f"search error: {response.status_code}")

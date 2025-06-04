@@ -156,7 +156,7 @@
                 .then(res => res.json())
                 .then(data => {
                     console.log()
-                    const tracks = data?.tracks?.items;
+                    const tracks = data?.tracks?.items ?? [];
 
                     if (query.length === 0) return;
 
