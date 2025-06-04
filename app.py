@@ -190,8 +190,8 @@ def getSearch(query):
         print("query_data: ", query_data)
         return query_data
     else: 
-        print(f"search error: {response.status_code}")
-        return None;
+        print(f"Spotify Search Error {response.status_code}: {response.text}")
+        return None
 
 
 
