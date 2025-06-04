@@ -152,7 +152,7 @@
             dropdown.style.display = "block";
             dropdown.innerHTML = "";
 
-            fetch('/search?q=${encodeURIComponent(query)}')
+            fetch(`/search?q=${encodeURIComponent(query)}`)
                 .then(res => res.json())
                 .then(data => {
                     console.log(data);

@@ -258,7 +258,7 @@ def Search():
 
     query = request.args.get('q','')
     result = getSearch(query)
-    print(result)
+    print(jsonify(result))
     return jsonify(result)
 
 def get_album_details(album_id, access_token):
