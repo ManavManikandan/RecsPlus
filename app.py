@@ -178,6 +178,7 @@ def getSearch(query):
 
     if response.status_code == 200:
         query_data = response.json()
+        print("query data: ", query_data)
         return query_data
     else: 
         print(f"search error: {response.status_code}")
@@ -257,6 +258,7 @@ def Search():
         return jsonify({'error': 'User not authenticated'}), 401
 
     query = request.args.get('q','')
+    print("query: ", query)
     result = getSearch(query)
     print(jsonify(result))
     return jsonify(result)
