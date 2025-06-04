@@ -67,16 +67,24 @@ def callback():
     if 'error' in request.args:
         return jsonify({"error": request.args['error']})
 
-    if 'code' in request.args:
-        req_body = {
-            'code': request.args['code'],
-            'grant_type': 'authorization_code',
-            'redirect_uri': REDIRECT_URI,
-            'client_id': CLIENT_ID,
-            'client_secret': CLIENT_SECRET
-        }
+    code = request.args.get('code')
+    if not code: 
+        return jsonify({"error": "Missing authorization code"}), 400
+
+    req_body = {
+        'code': request.args['code'],
+        'grant_type': 'authorization_code',
+        'redirect_uri': REDIRECT_URI,
+        'client_id': CLIENT_ID,
+        'client_secret': CLIENT_SECRET
+    }
 
     response = requests.post(TOKEN_URL, data=req_body)
+
+    if response.status_code != 200:
+        print("Error in token request:", response.text)
+        return jsonify({'error': 'Token exchange failed'}), 500
+
     token_info = response.json()
 
     session['access_token'] = token_info['access_token']
@@ -129,21 +137,20 @@ def refresh_token():
     if 'refresh_token' not in session:
         return redirect('/login')
 
-    if datetime.now().timestamp() > session['expires_in']:
-        req_body = {
-            'grant_type': 'refresh_token',
-            'refresh_token': session['refresh_token'],
-            'client_id': CLIENT_ID,
-            'client_secret': CLIENT_SECRET
-        }
+    req_body = {
+        'grant_type': 'refresh_token',
+        'refresh_token': session['refresh_token'],
+        'client_id': CLIENT_ID,
+        'client_secret': CLIENT_SECRET
+    }
 
-        response = requests.post(TOKEN_URL, data=req_body)
-        new_token_info = response.json()
+    response = requests.post(TOKEN_URL, data=req_body)
+    new_token_info = response.json()
 
-        session['access_token'] = new_token_info['access_token']
-        session['expires_in'] = datetime.now().timestamp() + new_token_info['expires_in']
+    session['access_token'] = new_token_info['access_token']
+    session['expires_in'] = datetime.now().timestamp() + new_token_info['expires_in']
 
-        return redirect('/')
+    return redirect('/')
 
 
 
@@ -258,6 +265,10 @@ def playlist():
 def Search():
     if 'access_token' not in session:
         return jsonify({'error': 'User not authenticated'}), 401
+    
+    if datetime.now().timestamp() > session['expires_in']:
+        print("Search error: Token expired")
+        return jsonify({'error': 'Access token expired'}), 401
 
     query = request.args.get('q','')
     print("query: ", query)

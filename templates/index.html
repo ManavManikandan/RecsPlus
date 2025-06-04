@@ -155,6 +155,10 @@
             fetch(`/search?q=${encodeURIComponent(query)}`)
                 .then(res => res.json())
                 .then(data => {
+                    if (data.error) {
+                        console.error("JS Search Error: ", data.error);
+                    }
+                 
                     const tracks = data?.tracks?.items ?? [];
                     console.log(data)
                     if (query.length === 0) return;
