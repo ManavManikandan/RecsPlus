@@ -191,7 +191,10 @@ def getSearch(query):
         return query_data
     else: 
         print(f"Spotify Search Error {response.status_code}: {response.text}")
-        return None
+        return {
+            'error': f'Spotify API returned status {response.status_code}',
+            'details': response.text
+        }
 
 
 
