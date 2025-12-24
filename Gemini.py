@@ -15,7 +15,7 @@ def generate(songInput):
         api_key=os.environ.get("GEMINI_API_KEY"),
     )
 
-    model = "gemini-2.5-pro"
+    model = "gemini-2.5-flash"
     contents = [
         types.Content(
             role="user",
